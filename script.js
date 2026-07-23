@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      // Allow external links (like Sign In) to work normally if they have an href
+      // Allow external links to work normally
       if(link.getAttribute('href') && !link.getAttribute('href').startsWith('#')) return;
       
       e.preventDefault();
@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Add active to clicked link
       link.classList.add('active');
 
-      // Find target page by text content or data-target
-      const targetText = link.textContent.trim().toLowerCase().replace(' ', '-');
-      const targetPage = document.getElementById(`view-${targetText}`);
+      // Find target page by href
+      const targetId = link.getAttribute('href').substring(1);
+      const targetPage = document.getElementById(`view-${targetId}`);
       
       if (targetPage) {
         targetPage.classList.add('active');
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartBtn = document.querySelector('.cart-btn');
   const cartDrawer = document.querySelector('.cart-drawer');
   const overlay = document.querySelector('.overlay');
-  const closeCartBtn = document.getElementById('close-cart'); // Make sure you have <button id="close-cart"> in HTML
+  const closeCartBtn = document.getElementById('close-cart');
 
   function openCart() {
     if(cartDrawer) cartDrawer.classList.add('open');
@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- 4. CAT AI ASSISTANT CHAT ---
   const catTrigger = document.querySelector('.cat-assistant-trigger');
   const chatWindow = document.querySelector('.chat-window');
-  const closeChatBtn = document.querySelector('.chat-header button'); // Assume there is a close button in chat header
+  // Target the close button inside the chat header
+  const closeChatBtn = document.querySelector('.chat-header button');
 
   if (catTrigger && chatWindow) {
     catTrigger.addEventListener('click', () => {
