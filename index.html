@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Starbucks Clone</title>
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -11,9 +12,11 @@
 </head>
 <body>
 
+  <!-- Global Backgrounds (Restored) -->
   <div id="global-bg-container"></div>
   <div id="global-bg-overlay"></div>
 
+  <!-- Header & Navigation -->
   <header>
     <div class="nav-container">
       <a href="#" class="brand-logo">
@@ -23,14 +26,14 @@
         STARBUCKS
       </a>
 
-      <!-- Hamburger Icon (Hidden on Desktop) -->
+      <!-- Mobile Hamburger Button -->
       <div class="hamburger" id="hamburger-btn">
         <span></span>
         <span></span>
         <span></span>
       </div>
 
-      <nav class="nav-links" id="nav-links">
+      <nav class="nav-links">
         <a href="#home" class="active">Home</a>
         <a href="#menu">Menu</a>
         <a href="#gift-cards">Gift Cards</a>
@@ -83,7 +86,7 @@
     </div>
   </main>
 
-  <!-- MENU PAGE -->
+  <!-- MENU PAGE (Restored Grids) -->
   <main class="page-view" id="view-menu">
     <div class="menu-container">
       <aside class="sidebar-categories">
@@ -96,7 +99,35 @@
       </aside>
       <section class="menu-main-content">
         <input type="text" class="search-bar" placeholder="Search our menu...">
-        <div class="products-grid"></div>
+        <div class="products-grid">
+          <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=500&q=80" alt="Caramel Macchiato" class="product-img">
+            <h3 class="product-title">Caramel Macchiato</h3>
+            <p class="product-desc">Freshly steamed milk with vanilla-flavored syrup.</p>
+            <div class="product-controls">
+              <span class="product-price">$5.45</span>
+              <div class="quantity-selector">
+                <button class="qty-btn">-</button>
+                <input type="text" class="qty-input" value="1" readonly style="width: 30px; text-align: center; border: none; background: transparent; font-weight: bold;">
+                <button class="qty-btn">+</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=500&q=80" alt="Mocha" class="product-img">
+            <h3 class="product-title">Caffè Mocha</h3>
+            <p class="product-desc">Espresso with bittersweet mocha sauce and steamed milk.</p>
+            <div class="product-controls">
+              <span class="product-price">$4.95</span>
+              <div class="quantity-selector">
+                <button class="qty-btn">-</button>
+                <input type="text" class="qty-input" value="1" readonly style="width: 30px; text-align: center; border: none; background: transparent; font-weight: bold;">
+                <button class="qty-btn">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   </main>
@@ -125,12 +156,24 @@
     </div>
   </main>
 
-  <!-- STORES PAGE -->
+  <!-- STORES PAGE (Restored) -->
   <main class="page-view" id="view-stores">
     <div class="section-title">
       <h2>Find a Store</h2>
     </div>
-    <div class="stores-grid"></div>
+    <div class="stores-grid">
+      <div class="product-card" style="padding: 24px;">
+        <h3 class="product-title">Downtown Reserve</h3>
+        <p class="product-desc" style="margin-bottom: 16px; color: var(--sb-gray600);">
+          123 Main Street<br>
+          <strong>Open until 9:00 PM</strong>
+        </p>
+        <div style="display: flex; gap: 10px; width: 100%;">
+          <button class="btn btn-light" style="flex: 1;">Directions</button>
+          <button class="btn btn-green" style="flex: 1;">Order Here</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -152,6 +195,7 @@
     </div>
   </footer>
 
+  <!-- Overlays & Modals -->
   <div class="overlay"></div>
 
   <!-- Cart Drawer -->
