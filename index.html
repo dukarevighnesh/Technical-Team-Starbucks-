@@ -4,20 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Starbucks Clone</title>
-  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <!-- Link to CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Global Backgrounds -->
   <div id="global-bg-container"></div>
   <div id="global-bg-overlay"></div>
 
-  <!-- Header & Navigation -->
   <header>
     <div class="nav-container">
       <a href="#" class="brand-logo">
@@ -27,14 +23,14 @@
         STARBUCKS
       </a>
 
-      <!-- Mobile Hamburger Button -->
+      <!-- Hamburger Icon (Hidden on Desktop) -->
       <div class="hamburger" id="hamburger-btn">
         <span></span>
         <span></span>
         <span></span>
       </div>
 
-      <nav class="nav-links">
+      <nav class="nav-links" id="nav-links">
         <a href="#home" class="active">Home</a>
         <a href="#menu">Menu</a>
         <a href="#gift-cards">Gift Cards</a>
@@ -70,7 +66,6 @@
     </div>
     
     <div class="products-grid">
-      <!-- Product Card -->
       <div class="product-card">
         <span class="pop-badge">#1 Bestseller</span>
         <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=500&q=80" alt="Coffee" class="product-img">
@@ -85,7 +80,6 @@
           </div>
         </div>
       </div>
-      <!-- Add more product cards here as needed -->
     </div>
   </main>
 
@@ -102,9 +96,7 @@
       </aside>
       <section class="menu-main-content">
         <input type="text" class="search-bar" placeholder="Search our menu...">
-        <div class="products-grid">
-          <!-- Inject Menu Items Here -->
-        </div>
+        <div class="products-grid"></div>
       </section>
     </div>
   </main>
@@ -138,9 +130,7 @@
     <div class="section-title">
       <h2>Find a Store</h2>
     </div>
-    <div class="stores-grid">
-      <!-- Inject Store Cards Here -->
-    </div>
+    <div class="stores-grid"></div>
   </main>
 
   <!-- Footer -->
@@ -162,7 +152,6 @@
     </div>
   </footer>
 
-  <!-- Overlays & Modals -->
   <div class="overlay"></div>
 
   <!-- Cart Drawer -->
@@ -196,7 +185,6 @@
     </div>
   </div>
 
-  <!-- Link to JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
