@@ -1,233 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starbucks Clone</title>
-  <!-- Google Fonts -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starbucks Reserve & Global Cafés</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Global Backgrounds (Restored) -->
   <div id="global-bg-container"></div>
   <div id="global-bg-overlay"></div>
+  <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
 
-  <!-- Header & Navigation -->
   <header>
     <div class="nav-container">
-      <a href="#" class="brand-logo">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <circle cx="12" cy="12" r="10" />
+      <div class="brand-logo" onclick="switchView('home')">
+        <svg viewBox="0 0 108 108" fill="none">
+          <circle cx="54" cy="54" r="48" fill="#006241"/>
+          <path d="M54 20C58.4 20 62 23.6 62 28C62 32.4 58.4 36 54 36C49.6 36 46 32.4 46 28C46 23.6 49.6 20 54 20Z" fill="#FFFFFF"/>
         </svg>
         STARBUCKS
-      </a>
-
-      <!-- Mobile Hamburger Button -->
-      <div class="hamburger" id="hamburger-btn">
-        <span></span>
-        <span></span>
-        <span></span>
       </div>
 
-      <nav class="nav-links">
-        <a href="#home" class="active">Home</a>
-        <a href="#menu">Menu</a>
-        <a href="#gift-cards">Gift Cards</a>
-        <a href="#stores">Stores</a>
-      </nav>
+      <ul class="nav-links">
+        <li><a id="nav-home" class="active" onclick="switchView('home')">Home</a></li>
+        <li><a id="nav-menu" onclick="switchView('menu')">Menu</a></li>
+        <li><a id="nav-giftcards" onclick="switchView('giftcards')">Gift Cards</a></li>
+        <li><a id="nav-store" onclick="switchView('store')">Stores</a></li>
+      </ul>
 
       <div class="nav-right">
-        <a href="#" class="btn btn-light">Sign In</a>
-        <button class="cart-btn">
+        <button class="btn btn-light" id="userAccountBtn" onclick="toggleAuthModal(true)">Sign In</button>
+        <button class="cart-btn" onclick="toggleCart(true)">
           🛒
-          <span class="cart-badge">0</span>
+          <span class="cart-badge" id="cartBadge">0</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- HOME PAGE -->
-  <main class="page-view active" id="view-home">
+  <main id="view-home" class="page-view active">
     <section class="section-backdrop bg-hero">
       <div class="section-content hero-content">
         <span class="badge">Starbucks Global Reserve</span>
         <h1>Crafted Experience in Every Cup</h1>
         <p>Explore our extensive menu featuring 50+ handcrafted espresso roasts, refreshers, cold brews, and fresh bakery pastries.</p>
-        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-          <a href="#" class="btn btn-light">Explore Menu</a>
-          <a href="#" class="btn btn-green">Send a Gift Card</a>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <button class="btn btn-light" onclick="switchView('menu')">Explore Menu</button>
+          <button class="btn btn-green" onclick="switchView('giftcards')">Send a Gift Card</button>
         </div>
       </div>
     </section>
 
     <div class="section-title">
-      <h2>🔥 Popular & Trending Now</h2>
+      <span>🔥 Popular & Trending Now</span>
+      <button class="btn btn-light" onclick="switchView('menu')" style="font-size: 0.8rem;">View All (50)</button>
     </div>
-    
-    <div class="products-grid">
-      <div class="product-card">
-        <span class="pop-badge">#1 Bestseller</span>
-        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=500&q=80" alt="Coffee" class="product-img">
-        <h3 class="product-title">Caramel Macchiato</h3>
-        <p class="product-desc">Freshly steamed milk with vanilla-flavored syrup.</p>
-        <div class="product-controls">
-          <span class="product-price">$5.45</span>
-          <div class="quantity-selector">
-            <button class="qty-btn">-</button>
-            <input type="text" class="qty-input" value="1" readonly>
-            <button class="qty-btn">+</button>
-          </div>
-        </div>
+
+    <section class="section-backdrop bg-popular" style="padding: 32px;">
+      <div class="section-content">
+        <div class="products-grid" id="popularGrid"></div>
       </div>
-    </div>
+    </section>
   </main>
 
-  <!-- MENU PAGE (Restored Grids) -->
-  <main class="page-view" id="view-menu">
+  <main id="view-menu" class="page-view">
     <div class="menu-container">
-      <aside class="sidebar-categories">
-        <div class="categories-flex">
-          <button class="cat-btn active">Hot Coffees</button>
-          <button class="cat-btn">Cold Coffees</button>
-          <button class="cat-btn">Frappuccino</button>
-          <button class="cat-btn">Bakery</button>
-        </div>
-      </aside>
-      <section class="menu-main-content">
-        <input type="text" class="search-bar" placeholder="Search our menu...">
-        <div class="products-grid">
-          <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=500&q=80" alt="Caramel Macchiato" class="product-img">
-            <h3 class="product-title">Caramel Macchiato</h3>
-            <p class="product-desc">Freshly steamed milk with vanilla-flavored syrup.</p>
-            <div class="product-controls">
-              <span class="product-price">$5.45</span>
-              <div class="quantity-selector">
-                <button class="qty-btn">-</button>
-                <input type="text" class="qty-input" value="1" readonly style="width: 30px; text-align: center; border: none; background: transparent; font-weight: bold;">
-                <button class="qty-btn">+</button>
-              </div>
-            </div>
-          </div>
-          
-          <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=500&q=80" alt="Mocha" class="product-img">
-            <h3 class="product-title">Caffè Mocha</h3>
-            <p class="product-desc">Espresso with bittersweet mocha sauce and steamed milk.</p>
-            <div class="product-controls">
-              <span class="product-price">$4.95</span>
-              <div class="quantity-selector">
-                <button class="qty-btn">-</button>
-                <input type="text" class="qty-input" value="1" readonly style="width: 30px; text-align: center; border: none; background: transparent; font-weight: bold;">
-                <button class="qty-btn">+</button>
-              </div>
-            </div>
+      <div class="sidebar-categories">
+        <div class="glass-panel">
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px; color: var(--sb-darkGreen);">Categories</h3>
+          <div class="categories-flex">
+            <button class="cat-btn active" onclick="filterCategory('All', this)">All Items (50)</button>
+            <button class="cat-btn" onclick="filterCategory('Hot Coffees', this)">Hot Coffees (13)</button>
+            <button class="cat-btn" onclick="filterCategory('Cold Drinks', this)">Cold Drinks & Frapps (14)</button>
+            <button class="cat-btn" onclick="filterCategory('Global Specials', this)">Global Reserve (11)</button>
+            <button class="cat-btn" onclick="filterCategory('Bakery', this)">Bakery & Pastries (12)</button>
           </div>
         </div>
-      </section>
-    </div>
-  </main>
+      </div>
 
-  <!-- GIFT CARDS PAGE -->
-  <main class="page-view" id="view-gift-cards">
-    <div class="section-title">
-      <h2>Gift Cards</h2>
-    </div>
-    <div class="giftcard-grid">
-      <div class="giftcard-card">
-        <div class="giftcard-img-wrapper" style="background-image: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=500&q=80');">
-          <span class="giftcard-badge">Thank You</span>
-        </div>
-        <div class="giftcard-body">
-          <h3 class="giftcard-title">Coffee Lover Card</h3>
-          <p class="giftcard-desc">The perfect gift for any occasion.</p>
-          <div class="giftcard-amounts">
-            <button class="amount-btn active">$10</button>
-            <button class="amount-btn">$25</button>
-            <button class="amount-btn">$50</button>
-          </div>
-          <button class="btn btn-green" style="width: 100%;">Add to Cart</button>
-        </div>
+      <div class="menu-main-content">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search across 50 drinks, roasts, and pastries..." onkeyup="handleSearch()">
+        <div class="products-grid" id="productsGrid"></div>
       </div>
     </div>
   </main>
 
-  <!-- STORES PAGE (Restored) -->
-  <main class="page-view" id="view-stores">
-    <div class="section-title">
-      <h2>Find a Store</h2>
-    </div>
-    <div class="stores-grid">
-      <div class="product-card" style="padding: 24px;">
-        <h3 class="product-title">Downtown Reserve</h3>
-        <p class="product-desc" style="margin-bottom: 16px; color: var(--sb-gray600);">
-          123 Main Street<br>
-          <strong>Open until 9:00 PM</strong>
-        </p>
-        <div style="display: flex; gap: 10px; width: 100%;">
-          <button class="btn btn-light" style="flex: 1;">Directions</button>
-          <button class="btn btn-green" style="flex: 1;">Order Here</button>
-        </div>
+  <main id="view-giftcards" class="page-view">
+    <section class="section-backdrop bg-giftcards">
+      <div class="section-content">
+        <span class="badge">Give the Gift of Great Coffee</span>
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 12px;">Starbucks eGift Cards</h1>
+        <p style="max-width: 600px; color: rgba(255,255,255,0.9);">Select a card design, pick a balance amount, and send instant coffee joy directly to friends, family, or colleagues.</p>
       </div>
+    </section>
+
+    <div style="max-width: 1360px; margin: 0 auto;">
+      <div class="giftcard-grid" id="giftcardGrid"></div>
     </div>
   </main>
 
-  <!-- Footer -->
+  <main id="view-store" class="page-view">
+    <section class="section-backdrop bg-cafes">
+      <div class="section-content">
+        <span class="badge">Find Your Sanctuary</span>
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 12px;">Café & Reserve Store Locator</h1>
+        <p style="max-width: 600px; color: rgba(255,255,255,0.9);">Discover Roasteries and local Starbucks stores near you with complete opening hours.</p>
+      </div>
+    </section>
+
+    <div style="max-width: 1360px; margin: 0 auto;">
+      <input type="text" class="search-bar" id="storeSearchInput" placeholder="Enter city, neighborhood or zipcode..." onkeyup="filterStores()">
+      <div class="stores-grid" id="storesGrid"></div>
+    </div>
+  </main>
+
+  <!-- VIBRANT ORANGE CAT FACE WITH STARBUCKS HAT (ASSISTANT TRIGGER) -->
+  <div class="cat-assistant-trigger" onclick="toggleChatWindow()" title="Click to chat with Starbucks Barista Cat!">
+    <div class="cat-speech-bubble">Need Help? Meow!</div>
+    <svg viewBox="0 0 100 110" width="100%" height="100%">
+      <path d="M 80,85 Q 95,75 90,60" fill="none" stroke="#d97706" stroke-width="8" stroke-linecap="round"/>
+      <ellipse cx="50" cy="80" rx="28" ry="22" fill="#f97316" />
+      <ellipse cx="50" cy="82" rx="18" ry="16" fill="#fb923c" />
+      <circle cx="50" cy="46" r="22" fill="#f97316" />
+      <polygon points="30,34 22,14 40,28" fill="#f97316" />
+      <polygon points="32,32 25,18 39,28" fill="#ffb7c5" />
+      <polygon points="70,34 78,14 60,28" fill="#f97316" />
+      <polygon points="68,32 75,18 61,28" fill="#ffb7c5" />
+
+      <!-- Blinking Eyes -->
+      <g class="cat-eye">
+        <ellipse cx="41" cy="45" rx="4" ry="5" fill="#facc15" />
+        <circle cx="41" cy="45" r="2" fill="#000000" />
+      </g>
+      <g class="cat-eye">
+        <ellipse cx="59" cy="45" rx="4" ry="5" fill="#facc15" />
+        <circle cx="59" cy="45" r="2" fill="#000000" />
+      </g>
+
+      <polygon points="48,51 52,51 50,53" fill="#ffb7c5" />
+      <path d="M 50,53 Q 46,58 43,55 M 50,53 Q 54,58 57,55" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="26" y1="48" x2="12" y2="46" stroke="#ffffff" stroke-width="1.2"/>
+      <line x1="26" y1="52" x2="14" y2="54" stroke="#ffffff" stroke-width="1.2"/>
+      <line x1="74" y1="48" x2="88" y2="46" stroke="#ffffff" stroke-width="1.2"/>
+      <line x1="74" y1="52" x2="86" y2="54" stroke="#ffffff" stroke-width="1.2"/>
+
+      <!-- STARBUCKS GREEN VISOR HAT -->
+      <path d="M 26,30 Q 50,18 74,30 L 70,22 Q 50,14 30,22 Z" fill="#006241" />
+      <path d="M 32,26 Q 50,10 68,26 L 65,22 Q 50,8 35,22 Z" fill="#1e3932" />
+      <circle cx="50" cy="20" r="6" fill="#006241" stroke="#ffffff" stroke-width="1" />
+      <polygon points="50,16 51.5,19 55,19 52,21 53,24 50,22 47,24 48,21 45,19 48.5,19" fill="#ffffff" />
+    </svg>
+  </div>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <h4>🐱 Starbucks Meow-rista Assistant</h4>
+      <button onclick="toggleChatWindow()" style="background:none; border:none; color:white; font-size: 1.2rem; cursor:pointer;">✕</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">Meow! Welcome to Starbucks! I'm your orange feline barista. How can I assist with your 50+ drinks, locations, or gifts today?</div>
+    </div>
+    <div class="chat-footer">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." onkeypress="handleChatKeyPress(event)">
+      <button class="btn btn-green" onclick="sendChatMessage()" style="padding: 8px 16px;">Send</button>
+    </div>
+  </div>
+
+  <div class="modal" id="authModal">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+      <h3 style="font-weight: 800; color: var(--sb-darkGreen);">Sign In to Starbucks</h3>
+      <button onclick="toggleAuthModal(false)" style="background:none; border:none; font-size: 1.4rem; cursor:pointer;">✕</button>
+    </div>
+    <form onsubmit="handleSignIn(event)">
+      <div style="margin-bottom: 16px;">
+        <label style="display:block; font-size: 0.88rem; font-weight:700; margin-bottom:6px;">Email Address</label>
+        <input type="email" id="loginEmail" style="width:100%; padding: 12px; border-radius:8px; border:1px solid #ccc;" placeholder="name@example.com" required>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <label style="display:block; font-size: 0.88rem; font-weight:700; margin-bottom:6px;">Password</label>
+        <input type="password" id="loginPassword" style="width:100%; padding: 12px; border-radius:8px; border:1px solid #ccc;" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-green" style="width: 100%; padding: 12px;">Sign In</button>
+    </form>
+  </div>
+
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2 style="font-weight: 800;">Your Order</h2>
+      <button onclick="toggleCart(false)" style="background:none; border:none; font-size: 1.4rem; cursor:pointer;">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div>
+      <div style="margin-bottom: 16px;">
+        <label style="font-size: 0.85rem; font-weight: 700;">Payment Options</label>
+        <div class="payment-methods">
+          <div class="payment-option selected" onclick="selectPayment(this)">💳 Credit Card</div>
+          <div class="payment-option" onclick="selectPayment(this)">⭐ Starbucks Card</div>
+          <div class="payment-option" onclick="selectPayment(this)">📱 Apple / Google Pay</div>
+          <div class="payment-option" onclick="selectPayment(this)">⚡ Instant UPI</div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-weight:800; font-size: 1.25rem; margin-bottom: 20px;">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn btn-green" onclick="processCheckout()" style="width: 100%; padding: 14px;">Complete Checkout</button>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-container">
       <div class="footer-col">
+        <h4>Customer Support & Care</h4>
+        <p>📞 <strong>Toll-Free Helpline:</strong> 1-800-23-4279 (1-800-STARBUCKS)</p>
+        <p>✉️ <strong>Customer Care Email:</strong> support@starbucks.com</p>
+        <p>✉️ <strong>Corporate Inquiries:</strong> info@starbucks-reserve.com</p>
+      </div>
+      <div class="footer-col">
         <h4>About Us</h4>
         <a href="#">Our Heritage</a>
-        <a href="#">Coffeehouse</a>
+        <a href="#">Our Coffee & Roasteries</a>
+        <a href="#">Stories and News</a>
       </div>
       <div class="footer-col">
         <h4>Customer Service</h4>
         <a href="#">Contact Us</a>
-        <a href="#">FAQs</a>
+        <a href="#">Cards & Balance Transfer</a>
+        <a href="#">Order & Pickup Options</a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 Starbucks Clone Project. All rights reserved.
+      <p>© 2026 Starbucks Corporation. All rights reserved.</p>
     </div>
   </footer>
-
-  <!-- Overlays & Modals -->
-  <div class="overlay"></div>
-
-  <!-- Cart Drawer -->
-  <div class="cart-drawer">
-    <div class="cart-header">
-      <h3>Your Cart</h3>
-      <button id="close-cart" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-    </div>
-    <div class="cart-items">
-      <p style="text-align: center; color: var(--sb-gray600); margin-top: 20px;">Your cart is empty.</p>
-    </div>
-  </div>
-
-  <!-- AI Cat Assistant -->
-  <div class="cat-assistant-trigger">
-    <div class="cat-speech-bubble">Need Help? Meow!</div>
-    <img src="https://cdn-icons-png.flaticon.com/512/1864/1864514.png" alt="Cat Assistant" style="width: 100%; height: 100%;">
-  </div>
-
-  <div class="chat-window">
-    <div class="chat-header">
-      <h4>🐱 Coffee Bot</h4>
-      <button style="background:none; border:none; color:white; cursor:pointer; font-size:1.2rem;">&times;</button>
-    </div>
-    <div class="chat-body">
-      <div class="chat-msg bot">Meow! How can I help you find the perfect drink today? ☕</div>
-    </div>
-    <div class="chat-footer">
-      <input type="text" class="chat-input" placeholder="Type a message...">
-      <button class="btn btn-green" style="padding: 10px 16px;">Send</button>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>
