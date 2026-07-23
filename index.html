@@ -25,19 +25,27 @@
         STARBUCKS
       </div>
 
-      <ul class="nav-links">
-        <li><a id="nav-home" class="active" onclick="switchView('home')">Home</a></li>
-        <li><a id="nav-menu" onclick="switchView('menu')">Menu</a></li>
-        <li><a id="nav-giftcards" onclick="switchView('giftcards')">Gift Cards</a></li>
-        <li><a id="nav-store" onclick="switchView('store')">Stores</a></li>
-      </ul>
+      <div class="hamburger" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-      <div class="nav-right">
-        <button class="btn btn-light" id="userAccountBtn" onclick="toggleAuthModal(true)">Sign In</button>
-        <button class="cart-btn" onclick="toggleCart(true)">
-          🛒
-          <span class="cart-badge" id="cartBadge">0</span>
-        </button>
+      <div class="nav-menu" id="navMenu">
+        <ul class="nav-links">
+          <li><a id="nav-home" class="active" onclick="switchView('home'); toggleMobileMenu()">Home</a></li>
+          <li><a id="nav-menu" onclick="switchView('menu'); toggleMobileMenu()">Menu</a></li>
+          <li><a id="nav-giftcards" onclick="switchView('giftcards'); toggleMobileMenu()">Gift Cards</a></li>
+          <li><a id="nav-store" onclick="switchView('store'); toggleMobileMenu()">Stores</a></li>
+        </ul>
+
+        <div class="nav-right">
+          <button class="btn btn-light" id="userAccountBtn" onclick="toggleAuthModal(true); toggleMobileMenu()">Sign In</button>
+          <button class="cart-btn" onclick="toggleCart(true); toggleMobileMenu()">
+            🛒
+            <span class="cart-badge" id="cartBadge">0</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
