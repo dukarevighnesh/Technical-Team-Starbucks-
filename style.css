@@ -34,13 +34,16 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  width: 100%;
 }
 
+/* Global Flexbox Body Wrapper */
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--sb-black);
   background-color: #0d0d0d;
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -91,6 +94,7 @@ header {
   justify-content: space-between;
   padding: 12px 32px;
   gap: 20px;
+  width: 100%;
 }
 
 .brand-logo {
@@ -159,6 +163,7 @@ header {
   font-size: 1.2rem;
   transition: var(--transition-fast);
   box-shadow: var(--sb-shadow-sm);
+  flex-shrink: 0;
 }
 
 .cart-btn:hover {
@@ -221,15 +226,18 @@ header {
   border-color: var(--sb-darkGreen);
 }
 
+/* Flexbox layout for views to support stacking on mobile */
 .page-view {
   display: none;
+  flex-direction: column;
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 0 20px 80px 20px;
   width: 100%;
+  max-width: 100%;
 }
 
 .page-view.active {
-  display: block;
+  display: flex;
 }
 
 @keyframes fadeIn {
@@ -239,6 +247,7 @@ header {
 
 .section-backdrop {
   max-width: 1360px;
+  width: 100%;
   margin: 28px auto;
   border-radius: var(--radius-lg);
   padding: 48px;
@@ -263,6 +272,8 @@ header {
   position: relative;
   z-index: 2;
   color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 .bg-hero { background-image: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1600&q=80'); }
@@ -283,6 +294,7 @@ header {
   text-transform: uppercase;
   margin-bottom: 20px;
   border: 1px solid rgba(255,255,255,0.3);
+  align-self: flex-start;
 }
 
 .hero-content h1 {
@@ -308,10 +320,13 @@ header {
   border: 1px solid var(--sb-glass-border);
   box-shadow: var(--sb-shadow-md);
   color: var(--sb-black);
+  display: flex;
+  flex-direction: column;
 }
 
 .section-title {
   max-width: 1360px;
+  width: 100%;
   margin: 36px auto 20px auto;
   color: white;
   font-size: 1.75rem;
@@ -325,6 +340,7 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
+  width: 100%;
 }
 
 .product-card {
@@ -439,6 +455,7 @@ header {
 
 .menu-container {
   max-width: 1360px;
+  width: 100%;
   margin: 28px auto;
   display: flex;
   gap: 28px;
@@ -446,7 +463,7 @@ header {
 
 .sidebar-categories { flex: 0 0 260px; }
 .categories-flex { display: flex; flex-direction: column; gap: 8px; }
-.menu-main-content { flex: 1; }
+.menu-main-content { flex: 1; display: flex; flex-direction: column; width: 100%; }
 
 .cat-btn {
   display: flex;
@@ -497,6 +514,7 @@ header {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
   margin-top: 24px;
+  width: 100%;
 }
 
 .giftcard-card, .store-card {
@@ -529,7 +547,7 @@ header {
   font-weight: 700;
 }
 
-.giftcard-body, .store-card { padding: 20px; }
+.giftcard-body, .store-card { padding: 20px; display: flex; flex-direction: column; flex: 1; }
 .giftcard-title { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; }
 .giftcard-desc { font-size: 0.85rem; color: var(--sb-gray600); margin-bottom: 16px; }
 
@@ -727,6 +745,7 @@ footer {
   padding: 48px 32px;
   margin-top: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
 .footer-container {
@@ -751,9 +770,60 @@ footer {
   line-height: 1.6;
 }
 
-@media (max-width: 900px) {
-  .menu-container { flex-direction: column; }
-  .sidebar-categories { flex: 1 1 100%; }
-  .categories-flex { flex-direction: row; overflow-x: auto; padding-bottom: 10px; }
-  .cat-btn { white-space: nowrap; }
+/* Mobile Responsiveness Flex Fixes */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 12px 16px;
+  }
+  
+  .nav-links {
+    display: none; 
+  }
+
+  .section-backdrop {
+    padding: 24px 16px;
+    margin: 16px 8px;
+    border-radius: var(--radius-md);
+    width: calc(100% - 16px);
+  }
+
+  .menu-container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+  }
+
+  .sidebar-categories {
+    width: 100%;
+    flex: none;
+  }
+
+  .categories-flex {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cat-btn {
+    white-space: nowrap;
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .products-grid, .giftcard-grid, .stores-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .chat-window {
+    width: calc(100vw - 32px);
+    right: 16px;
+    bottom: 110px;
+  }
+
+  .cart-drawer {
+    max-width: 100%;
+    right: -100%;
+  }
 }
