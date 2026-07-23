@@ -348,6 +348,16 @@ function closeAllModals() {
   document.getElementById('overlay').classList.remove('active');
 }
 
+// Toggles the mobile hamburger menu open and closed
+function toggleMobileMenu() {
+  const navMenu = document.getElementById('navMenu');
+  
+  // Only trigger the toggle on smaller screens where the menu drops down
+  if (window.innerWidth <= 900) {
+    navMenu.classList.toggle('active');
+  }
+}
+
 renderMenu(products);
 renderPopularItems();
 renderGiftCards();
